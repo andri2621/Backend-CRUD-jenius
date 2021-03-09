@@ -1,8 +1,9 @@
 const User  = require('../models/user')
 const user  = require('../models/user')
+const {cleanCache}   = require('../middleware/clearCache')
 
 const index =   (req,res,next) => {
-    User.find()
+    User.find().cache()
     .then(data => {
         res.json({
             data
@@ -110,12 +111,14 @@ const createUser = async (req, res, next) => {
             message: 'berhasil menambahkan data!',
             data
         })
+    cleanCache()
     })
     .catch(error => {
         res.json({
             message: 'error gagal menambahkan data'
         })
     })
+
 }
 
 const updateUser    =    (req,res,next) => {

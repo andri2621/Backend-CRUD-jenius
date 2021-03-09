@@ -5,7 +5,14 @@ const morgan        = require('morgan')
 
 const userRoute     = require('./routes/user')
 
-mongoose.connect('mongodb://localhost:27017/AndiSetiawan', {useNewUrlParser : true, useUnifiedTopology: true, useCreateIndex: true})
+
+const clearCache   = require('./services/cache')
+
+
+
+
+
+mongoose.connect('mongodb+srv://andi:andi@andisetiawan.eervt.mongodb.net/AndiSetiawan?retryWrites=true&w=majority', {useNewUrlParser : true, useUnifiedTopology: true, useCreateIndex: true})
 const db = mongoose.connection
 
 db.on('error', (err) => {
