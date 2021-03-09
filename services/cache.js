@@ -2,8 +2,21 @@ const mongoose = require('mongoose')
 const redis = require('redis')
 const util = require('util')
 
-const redisUrl = 'redis://127.0.0.1:6379';
-const client = redis.createClient(redisUrl);
+// const redisUrl = 'redis://127.0.0.1:6379';
+// const client = redis.createClient(redisUrl);
+
+
+const client =redis.createClient(`redis://127.0.0.1:6379`);
+client.on("connected", (err) => {
+  console.error("Redis connected");
+}); 
+client.on("error", (err) => {
+  console.error(err);
+}); 
+
+
+
+
 // client get does not support promises. this is a way to promisify them
 client.hget = util.promisify(client.hget);
 
